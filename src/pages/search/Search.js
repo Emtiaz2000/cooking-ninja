@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/* import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import {projectFireStore,collection,query,where,getDocs} from '../../firebase/config'
 
@@ -19,7 +19,7 @@ export default function Search() {
 
   return (
     <p>data</p>
-  )
+  ) */
 
  /*  if(recipes===null || recipes.length===0){
     return <p>No Recipe to show...</p>
@@ -52,7 +52,7 @@ export default function Search() {
   } */
   
   
-  }
+//}
 
   
 

@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import {useNavigate, useParams} from 'react-router-dom'
 import { projectFireStore,getDoc,doc,deleteDoc } from '../../firebase/config'
-
+import {useTheme} from '../../hooks/useTheme'
 //css
 import './Recipes.css'
 import trash from '../../assets/trash.svg'
@@ -13,6 +13,8 @@ export default function Recipes() {
   const [isLoading, setIsLoding] = useState(false)
   const [delLoading, setDelLoding] = useState(false)
   const [error, setError] = useState(null)
+  const {mode} = useTheme()
+  
 
 
   const params = useParams().id
@@ -45,7 +47,7 @@ export default function Recipes() {
     fetchSingleData()
 
 
-  },[])
+  },[params])
 
 
   const deleteRecipe = async ()=>{
@@ -68,11 +70,11 @@ export default function Recipes() {
     if(error){
       return navigate('/')
     }
-  },[error])
+  },[error,navigate])
   
   return (
   <div>
-  {isLoading && <p>Recipe is loading...</p>}
+  {isLoading && <p style={{color:mode==='dark'?'#fff':'#000'}}>Recipe is loading...</p>}
   {delLoading && <p>Recipe is deleting...</p>}
    {error && <p>{error}</p>}
    { recipe && 

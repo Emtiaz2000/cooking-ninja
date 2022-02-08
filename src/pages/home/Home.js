@@ -1,13 +1,14 @@
 import React, { useEffect,useState } from 'react';
 import RecipeList from '../../components/RecipeList';
 import { projectFireStore,collection,getDocs } from '../../firebase/config'
+import {useTheme} from '../../hooks/useTheme'
 
 export default function Home() {
 
   const [data, setData] = useState(null)
   const [isLoading, setIsLoding] = useState(false)
   const [error, setError] = useState(null)
-
+  const {mode} = useTheme()
   useEffect(() => {
 
     const fetchData = async()=>{
@@ -23,7 +24,7 @@ export default function Home() {
         //create an array for storing fireStore data
       const result = []
       getData.docs.map(doc=> {
-        result.push({id:doc.id,...doc.data()})
+       return result.push({id:doc.id,...doc.data()})
       })
      
       setData(result)
@@ -44,7 +45,7 @@ export default function Home() {
 
   return (
     <div>
-      {isLoading && <p>Recipes are loading...</p>}
+      {isLoading && <p style={{color:mode==='dark'?"#fff":'#000'}}>Recipes are loading...</p>}
       {error && <p>{error}</p>}
       {data &&
         <RecipeList recipes={data} />
